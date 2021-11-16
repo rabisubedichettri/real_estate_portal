@@ -44,3 +44,9 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
+# Cors Settings
+CORS_ALLOW_CREDENTIALS = False
+
+# NOTE:
+# change 'https://example-prod-react.com' to your frontend domain
+CORS_ORIGIN_WHITELIST = []

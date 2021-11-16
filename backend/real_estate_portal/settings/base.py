@@ -19,6 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
 
+     # for security
+    "corsheaders",
+
     # rest framework related apps
     'rest_framework',
     "rest_framework_gis",
