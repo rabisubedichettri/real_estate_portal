@@ -18,6 +18,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
 
+    # rest framework related apps
+    'rest_framework',
+    "rest_framework_gis",
+    'rest_framework_simplejwt.token_blacklist',
+    'jwtmanager',
+
     'account',
     'location',
     'listing',
