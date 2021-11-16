@@ -48,4 +48,4 @@ CORS_ALLOW_CREDENTIALS = False
 
 # NOTE:
 # change 'https://example-prod-react.com' to your frontend domain
-CORS_ORIGIN_WHITELIST = ['*']
+CORS_ORIGIN_WHITELIST = []
