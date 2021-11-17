@@ -11,15 +11,22 @@ SECRET_KEY = 'django-insecure-!qz9e2n$xpr6%^7y8)^0#i7al@tei5vd+*ofp388phd)*!yc8&
 # Application definition
 
 INSTALLED_APPS = [
+    # channel apps
+    'realtimeapp',
+
+    # default django installed apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # geo-django apps
     'django.contrib.gis',
 
-     # for security
+
+    # for security and third party
     "corsheaders",
 
     # rest framework related apps
@@ -28,9 +35,12 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'jwtmanager',
 
+    # local apps
     'account',
     'location',
     'listing',
+
+    'notification',
 ]
 
 MIDDLEWARE = [
