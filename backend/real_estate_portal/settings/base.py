@@ -116,4 +116,5 @@ REST_FRAMEWORK = {
     )
 }
 
-
+# custom user model
+AUTH_USER_MODEL = 'account.User'
