@@ -8,7 +8,6 @@ from .serializers import (PropertyTypeSerializer,PropertyTypeUpdateSerializer,
                           SingleListingSerializer)
 from rest_framework.decorators import api_view
 
-
 @api_view(["GET","POST","PUT"])
 def propertyTypeView(request):
     data=""

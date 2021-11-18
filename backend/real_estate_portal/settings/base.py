@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'account',
     'location',
     'listing',
-
     'notification',
+    'pricing',
 ]
 
 MIDDLEWARE = [
