@@ -14,3 +14,23 @@ class Notification(models.Model):
     def __str__(self):
         return str(self.id)
 
+    class Meta:
+        ordering = ['-created_at',]
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+
+    # custom methods
+    def new(self,*args, **kwargs):
+        pass
+
+    def read(self,*args,**kwargs):
+        pass
+
+    def update(self,*args,**kwargs):
+        pass
+
+    def remove(self,*args,**kwargs):
+        pass
+
+

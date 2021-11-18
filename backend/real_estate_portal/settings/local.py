@@ -2,7 +2,7 @@ from decouple import config
 from .base import *
 from datetime import timedelta
 
-DEBUG = False
+DEBUG = True
 SECRET_KEY = config('SECRET_KEY_L')
 ALLOWED_HOSTS = ['127.0.0.1']
 DATABASES = {
