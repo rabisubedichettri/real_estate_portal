@@ -8,4 +8,5 @@ urlpatterns = [
     path("notification/", include("api.v1.notification.urls", namespace='notification')),
     path("pricing/", include("api.v1.pricing.urls", namespace='pricing')),
     path("payment/", include("api.v1.payment.urls", namespace='payment')),
+    path("search/",include("api.v1.search.urls",namespace='search')),
 ]

@@ -274,32 +274,3 @@ def singleListingView(request,id):
 
     return responseFormat(status=status_message, message=message, data=data, status_code=status_code, errors=errors)
 
-
-def featureView():
-    pass
-
-def randomView():
-    pass
-
-def recentView():
-    pass
-
-# based on pervious behaviour
-def predictView():
-    pass
-
-def mostView():
-    pass
-
-def favouriteView():
-    pass
-
-def searchFormView():
-    pass
-
-def searchMapView():
-    pass
-
-# gettting all details related to instance
-def detailView():
-    pass
