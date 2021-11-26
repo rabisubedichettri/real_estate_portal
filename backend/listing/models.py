@@ -137,3 +137,31 @@ class PropertyImages(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class FavouriteProperty(models.Model):
+    listing=models.ForeignKey(Listing,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
+class CountPropertyView(models.Model):
+    listing=models.ForeignKey(Listing,on_delete=models.CASCADE)
+    ip=models.GenericIPAddressField()
+    created_at=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
+
+class RecenltyPropertyView(models.Model):
+    listing=models.ForeignKey(Listing,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
+
+

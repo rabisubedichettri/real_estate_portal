@@ -107,8 +107,21 @@ class SingleListingSerializer(GeoFeatureModelSerializer):
         allow_empty_file=True)
     class Meta:
         model = Listing
-        fields = '__all__'
+        fields = ['profile_image',
+                  'purpose','phone_number','property_id',
+                  'categories','title','description',
+                  'direction','active','featured',
+                  'built_year','cost','land_area',
+                  'road_size','geo_location','video_link',
+                  'user','type','location','id'
+                  ]
         geo_field="geo_location"
+
+class ListingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Listing
+        fields = '__all__'
+
 
 
 

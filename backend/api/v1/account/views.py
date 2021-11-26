@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from .serializers import (UserRegistrationSerializer, PasswordChangeSerializer
                           ,UserUpdateSerializer)
 from api.v1.ResponseFormat import responseFormat
-
+from account.models import User
 
 @api_view(['GET', 'POST', 'PUT'])
 def ManageUser(request):

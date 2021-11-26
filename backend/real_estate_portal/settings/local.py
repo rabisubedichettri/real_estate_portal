@@ -50,3 +50,13 @@ CORS_ALLOW_CREDENTIALS = False
 # NOTE:
 # change 'https://example-prod-react.com' to your frontend domain
 CORS_ORIGIN_WHITELIST = []
+
+
+INSTALLED_APPS+=['khalti',]
+
+KHALTI_SECRET_KEY = config("KHALTI_SECRET_KEY_L")
+KHALTI_PUBLIC_KEY = config("KHALTI_PUBLIC_KEY_L")
+
+
+KHALTI_INITIATE_URL='https://khalti.com/api/v2/payment/initiate/'
+KHALTI_CONFIRM_URL='https://khalti.com/api/v2/payment/confirm/'

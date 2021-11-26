@@ -1,11 +1,12 @@
 from rest_framework import status
 from api.v1.ResponseFormat import responseFormat
 from listing.models import *
+
 from listing.models import AmenityType
 from .serializers import (PropertyTypeSerializer,PropertyTypeUpdateSerializer,
                           AmenityTypeUpdateSerializer,AmenityTypeSerializer,
                           AmenityTypePostSerializer,AmenitySerializer,
-                          SingleListingSerializer)
+                          SingleListingSerializer,ListingSerializer)
 from rest_framework.decorators import api_view
 
 @api_view(["GET","POST","PUT"])
@@ -24,6 +25,7 @@ def propertyTypeView(request):
             message="Successfully Feteched"
             status_message="success"
             data=serializer.data
+
         elif request.method=='POST':
             deserializer=PropertyTypeSerializer(data=request.POST)
             if deserializer.is_valid():
@@ -149,8 +151,6 @@ def AmenityView(request):
     return responseFormat(status=status_message, message=message, data=data, status_code=status_code, errors=errors)
 
 
-
-
 @api_view(["GET","POST","PUT"])
 def AmenityTypeView(request):
     data = ""
@@ -193,8 +193,6 @@ def AmenityTypeView(request):
     return responseFormat(status=status_message, message=message, data=data, status_code=status_code, errors=errors)
 
 
-
-
 @api_view(["GET","PUT"])
 def SingleAmenityTypeView(request,id):
     data = ""
@@ -222,9 +220,14 @@ def SingleAmenityTypeView(request,id):
     #     pass
     return responseFormat(status=status_message, message=message, data=data, status_code=status_code, errors=errors)
 
-@api_view(["GET","PUT"])
+@api_view(["GET"])
 def listingView(request):
-    pass
+    queryset=Listing.objects.filter(active=True)
+    serializer=ListingSerializer(queryset,many=True)
+    return responseFormat(
+        data=serializer.data,
+        status_code=status.HTTP_200_OK
+    )
 
 @api_view(["GET","PUT","POST"])
 def singleListingView(request,id):
@@ -237,35 +240,33 @@ def singleListingView(request,id):
         if request.method=="POST":
             serializer=SingleListingSerializer(data=request.POST)
             if serializer.is_valid():
-                if request.user.id==serializer.validated_data['id']:
-                    print(serializer.validated_data['id'])
-                    data=serializer.data
-                    status_message="success"
-                    message="Data fetched Successfully"
-                else:
-                    data = serializer.data
-                    status_message = "fail"
-                    message="you have not permission"
+                serializer.save()
+                status_message="success"
+                message="Data fetched Successfully"
             else:
                 data = serializer.data
-                errors = serializer.errors
                 status_message = "fail"
-                message = "Invalid Data Sent"
-                status_code = status.HTTP_400_BAD_REQUEST
+                message="you have not permission"
+        else:
+            # data = serializer.data
+            # errors = serializer.errors
+            status_message = "fail"
+            message = "Invalid Data Sent"
+            status_code = status.HTTP_400_BAD_REQUEST
 
-        elif request.method=="GET":
+    elif request.method=="GET":
 
-            obj=Listing.objects.all()
-            print(obj)
-            serializer=SingleListingSerializer(obj,many=True)
-            print(serializer)
-            status_code = status.HTTP_200_OK
-            message = "Successfully Feteched"
-            status_message = "success"
-            data = serializer.data
+        obj=Listing.objects.all()
+        print(obj)
+        serializer=SingleListingSerializer(obj,many=True)
+        print(serializer)
+        status_code = status.HTTP_200_OK
+        message = "Successfully Feteched"
+        status_message = "success"
+        data = serializer.data
 
-        elif request.method=="PUT":
-            pass
+    elif request.method=="PUT":
+        pass
     else:
         status_message = "fail"
         message = "You should be authenticated"
@@ -273,3 +274,32 @@ def singleListingView(request,id):
 
     return responseFormat(status=status_message, message=message, data=data, status_code=status_code, errors=errors)
 
+
+def featureView():
+    pass
+
+def randomView():
+    pass
+
+def recentView():
+    pass
+
+# based on pervious behaviour
+def predictView():
+    pass
+
+def mostView():
+    pass
+
+def favouriteView():
+    pass
+
+def searchFormView():
+    pass
+
+def searchMapView():
+    pass
+
+# gettting all details related to instance
+def detailView():
+    pass
