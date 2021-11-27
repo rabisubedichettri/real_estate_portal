@@ -130,4 +130,9 @@ dmypy.json
 
 
 # pycharm configuration file
-/.idea/
+*.idea/
+.vscode
+
+
+# images
+/backend/images

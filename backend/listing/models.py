@@ -78,6 +78,9 @@ class Listing(models.Model):
     def __str__(self):
         return str(self.title)
 
+    class Meta:
+        ordering=['-created_at']
+
 
 class PropertyAmenity(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)

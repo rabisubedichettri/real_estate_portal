@@ -6,14 +6,10 @@ from . import views
 app_name = "search"
 
 urlpatterns = [
-    path('recent-view/', views.recentView, name='recent-view'),
-    path('feature-view/', views.featureView, name='feature-view'),
-    path('most-view/', views.mostView, name="most-view"),
-    path('favourite-view/', views.favouriteView, name="favourite-view"),
-    path('random-view/', views.randomView, name='random-view'),
-    path("all/",views.allViewOnce,name="all-view-once"),
-    path('form-view/', views.searchFormView, name='form-view'),
-    path('map-view/', views.searchMapView, name='map-view', )
+    path('list/', views.ShortView, name='short-view'),
+    path("detail/<int:id>",views.LisitingdetailView,name="listing-detail-viewS"),
+    path('form/', views.searchFormView, name='form-view'),
+    path('map/', views.searchMapView, name='map-view', )
 
 
 ]
