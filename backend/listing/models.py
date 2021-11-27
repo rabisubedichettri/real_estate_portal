@@ -3,8 +3,7 @@ from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Local imports
-from location.models import District
-
+from location.models import Ward
 from .choices import (Property_Status, PropertyType_CHOICES, AmenityType_CHOICES, PROPERTY_PURPOSE,
                       PROPERTY_DIRECTION, PROPERTY_CATEGORY)
 from .utils import photo_path
@@ -70,7 +69,7 @@ class Listing(models.Model):
     status = models.CharField(choices=Property_Status, max_length=1, default='D')  # sold or did not sell
     land_area = models.DecimalField(max_digits=10, decimal_places=3)
     road_size = models.DecimalField(max_digits=10, decimal_places=3)
-    location = models.ForeignKey(District, on_delete=models.CASCADE)
+    location = models.ForeignKey(Ward, on_delete=models.CASCADE)
     tole = models.CharField(max_length=15, null=True, blank=True)
     geo_location = models.PointField(null=True,blank=True)  # {"type":"Point","coordinates":[114.65554242776489,1796.270164701642]}
     video_link = models.CharField(max_length=30)
