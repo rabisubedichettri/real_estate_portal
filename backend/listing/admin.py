@@ -6,6 +6,9 @@ from django.contrib.gis import admin
 admin.site.register(PropertyType)
 admin.site.register(Amenity)
 admin.site.register(AmenityType)
+admin.site.register(RecenltyPropertyView)
+admin.site.register(CountPropertyView)
+admin.site.register(FavouriteProperty)
 
 
 @admin.register(Listing)

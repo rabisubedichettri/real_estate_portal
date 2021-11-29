@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from listing.models import Listing,PropertyType
+from listing.models import Listing,PropertyType,CountPropertyView,RecenltyPropertyView
 from location.models import Ward,District,SubDistrict,Provience
 from  account.models import User
 
@@ -55,6 +55,24 @@ class ShortViewSerializer(ListingSerializer):
     class Meta:
         model= Listing
         fields=['profile_image','id','purpose','categories','cost','location']
+
+class MostViewSerializer(serializers.ModelSerializer):
+    listing=ShortViewSerializer(many=False)
+    class Meta:
+        model=CountPropertyView
+        fields=['listing',]
+
+class RecentViewSerializer(serializers.ModelSerializer):
+    listing=ShortViewSerializer(many=False)
+    class Meta:
+        model=RecenltyPropertyView
+        fields=['listing',]
+
+class FavouriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CountPropertyView
+        fields=['listing']
+
 
 class DetailViewSerializer(ListingSerializer):
     class Meta:

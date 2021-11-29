@@ -9,7 +9,14 @@ from .choices import (Property_Status, PropertyType_CHOICES, AmenityType_CHOICES
 from .utils import photo_path
 from .validators import validate_image
 
-#
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 class PropertyType(models.Model):
     name = models.CharField(max_length=15, unique=True)
     description = models.CharField(max_length=200, help_text='for example : house,shop,room,apartment')
@@ -47,6 +54,23 @@ class AmenityType(models.Model):
     def __str__(self):
         return str(self.id)
 
+class ListingManger(models.Manager):
+    def detailView(self,request, id):
+        result = self.filter(id=id, active=True)
+        if request.user.is_authenticated and not request.user.is_admin and request.user.is_active:
+            if result.exists():
+                ip=get_client_ip(request)
+                check_counter=CountPropertyView.objects.filter(ip__exact=ip,listing_id=id).exists()
+                if not check_counter:
+                    new_counter=CountPropertyView.objects.create(ip=ip,listing_id=id)
+                    new_counter.save()
+                check_recent=RecenltyPropertyView.objects.filter(user=request.user,listing_id=id).order_by('-created_at')
+                if not check_recent.exists():
+                    if check_recent[0].listing.id!=id:
+                        new_recent = RecenltyPropertyView.objects.create(user=request.user, listing_id=id)
+                        new_recent.save()
+        return result
+
 
 class Listing(models.Model):
     purpose = models.CharField(choices=PROPERTY_PURPOSE, max_length=1)
@@ -74,9 +98,12 @@ class Listing(models.Model):
     geo_location = models.PointField(null=True,blank=True)  # {"type":"Point","coordinates":[114.65554242776489,1796.270164701642]}
     video_link = models.CharField(max_length=30)
     profile_image = models.ImageField(upload_to="images/listing/", null=True,blank=True,validators=[validate_image])
-
+    objects = ListingManger()
     def __str__(self):
         return str(self.title)
+
+
+
 
     class Meta:
         ordering=['-created_at']
@@ -165,5 +192,7 @@ class RecenltyPropertyView(models.Model):
 
     def __str__(self):
         return str(self.id)
+    class Meta:
+        ordering=['created_at']
 
 
