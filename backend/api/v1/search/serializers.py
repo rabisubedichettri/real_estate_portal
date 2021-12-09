@@ -78,3 +78,12 @@ class DetailViewSerializer(ListingSerializer):
     class Meta:
         model=Listing
         fields='__all__'
+
+class MapViewSerializer(ListingSerializer):
+    distance = serializers.SerializerMethodField()
+
+    def get_distance(self, obj):
+        return obj.distance.m
+    class Meta:
+        model= Listing
+        fields=['distance','profile_image','id','purpose','categories','cost','location']

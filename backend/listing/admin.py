@@ -9,6 +9,7 @@ admin.site.register(AmenityType)
 admin.site.register(RecenltyPropertyView)
 admin.site.register(CountPropertyView)
 admin.site.register(FavouriteProperty)
+admin.site.register(PropertyRating)
 
 
 @admin.register(Listing)

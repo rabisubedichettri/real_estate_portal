@@ -122,7 +122,33 @@ class ListingSerializer(serializers.ModelSerializer):
         model = Listing
         fields = '__all__'
 
+class DraftDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=DraftPackage
+        fields="__all__"
+
+
+class RatingSeralizer(serializers.ModelSerializer):
+    class Meta:
+        model=PropertyRating
+        fields=['star']
+
+class RatingDetailSeralizer(serializers.ModelSerializer):
+    class Meta:
+        model=PropertyRating
+        fields='__all__'
 
 
 
 
+class CommentSerlizer(serializers.ModelSerializer):
+
+    class Meta:
+        model=PropertyComment
+        fields=['id','parent','content']
+
+class CommentPostSerlizer(serializers.ModelSerializer):
+    parent=serializers.IntegerField()
+    class Meta:
+        model=PropertyComment
+        fields=['content','parent']

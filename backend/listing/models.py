@@ -9,6 +9,8 @@ from .choices import (Property_Status, PropertyType_CHOICES, AmenityType_CHOICES
 from .utils import photo_path
 from .validators import validate_image
 
+from pricing.models import PaidPackageInfo
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -88,8 +90,7 @@ class Listing(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     built_year = models.PositiveSmallIntegerField()
-    cost=models.DecimalField(max_digits=10, decimal_places=3)
-
+    cost = models.DecimalField(max_digits=10, decimal_places=3)
     status = models.CharField(choices=Property_Status, max_length=1, default='D')  # sold or did not sell
     land_area = models.DecimalField(max_digits=10, decimal_places=3)
     road_size = models.DecimalField(max_digits=10, decimal_places=3)
@@ -98,12 +99,12 @@ class Listing(models.Model):
     geo_location = models.PointField(null=True,blank=True)  # {"type":"Point","coordinates":[114.65554242776489,1796.270164701642]}
     video_link = models.CharField(max_length=30)
     profile_image = models.ImageField(upload_to="images/listing/", null=True,blank=True,validators=[validate_image])
+    paid_package=models.ForeignKey(PaidPackageInfo,blank=True,null=True,on_delete=models.CASCADE) # change after some time
     objects = ListingManger()
+
+
     def __str__(self):
-        return str(self.title)
-
-
-
+        return self.title
 
     class Meta:
         ordering=['-created_at']
@@ -196,3 +197,6 @@ class RecenltyPropertyView(models.Model):
         ordering=['created_at']
 
 
+class DraftPackage(Listing):
+    def __str__(self):
+        return self.title
