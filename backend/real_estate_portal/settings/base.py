@@ -25,6 +25,7 @@ INSTALLED_APPS = [
 
     # geo-django apps
     'django.contrib.gis',
+    'drf_yasg',
 
 
     # for security and third party

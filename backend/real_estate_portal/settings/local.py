@@ -4,7 +4,7 @@ from datetime import timedelta
 
 DEBUG = True
 SECRET_KEY = config('SECRET_KEY_L')
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = '*'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
